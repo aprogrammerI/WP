@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Songs Homepage - Welcome to My Music Store</title>
+  <style type = "text/css">
+    body {
+      width: 800px;
+      margin: auto;
+    }
+    table {
+      width:100%;
+    }
+    table, td, th {
+      border: 1px solid black;
+      padding:3px 2px;
+    }
+    section {
+      float: left;
+      margin: 0 1.5%;
+      width: 63%;
+    }
+    aside {
+      float: right;
+      margin: 0 1.5%;
+      width: 30%;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Welcome to My Music Store</h1>
+</header>
+<main>
+  <h2>Choose a song:</h2>
+  <ul>
+    <li th:each="song : ${songs}">
+
+      <form th:action="@{/songs/edit/{songId}(songId=${song.getId()})}" method="get" style="display: inline;">
+        <!--                <input type="hidden" th:name="songId" th:value="${song.getId()}"/>-->
+        <span th:text="${song.getTitle()}"></span>
+        <button type="submit" >Add Artists</button>
+      </form>
+
+      <form th:action="@{/songs/delete/{id}(id=${song.getId()})}" method="get" style="display: inline;">
+        <button type="submit">Delete</button>
+      </form>
+
+      <form th:action="@{/songs/edit_song/{id}(id=${song.getId()})}" method="get" style="display: inline;">
+        <button type="submit">Edit</button>
+      </form>
+    </li>
+  </ul>
+
+  <br>
+  <h1>Add New Song</h1>
+  <form th:action="@{/songs/add}" method="post">
+    <label for="title">Song Title:</label>
+    <input type="text" id="title" name="title" required/><br><br>
+
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" name="genre" required/><br><br>
+
+    <label for="releaseYear">Release Year:</label>
+    <input type="number" id="releaseYear" name="releaseYear" required/><br><br>
+
+    <label for="albumId">Select Album:</label>
+    <select id="albumId" name="albumId" required>
+      <option th:each="album : ${albums}"
+              th:value="${album.getId()}"
+              th:text="${album.getName()}"></option>
+    </select><br><br>
+
+    <button type="submit">Add Song</button>
+  </form>
+</main>
+</body>
+</html>
