@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Add new Performer to Song</title>
+    <style type = "text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Select the Artist to add to the List of Performers </h1>
+</header>
+<section>
+    <h2>Select artist:</h2>
+
+    <form action="/artist" method="post">
+
+    <!-- Make changes to this code to dynamically display radio buttons for each artist as in the example -->
+    <th:block th:each="artist : ${artists}">
+        <input type="radio"
+                name="artistId"
+                th:value="${artist.getId()}"
+                th:text="${artist.getFirstName() + ' ' + artist.getLastName()}" />
+        <br/> <br/>
+    </th:block>
+        <input type="hidden" name="selectedSongId" th:value="${selectedSongId}">
+        <br/>
+
+    <input type='submit' value='Add artist'>
+
+    </form>
+</section>
+
+<aside>
+    <table>
+        <tr>
+            <!-- change to show selected trackId -->
+            <td><b>Track Id</b></td>
+            <td th:text="${selectedSongId}"></td>
+        </tr>
+    </table>
+</aside>
+</body>
+</html>

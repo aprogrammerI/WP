@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${song.id != null ? 'Edit Song' : 'Add New Song'}"></title>
+    <style type = "text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<h2 th:text="${song.id != null ? 'Edit Song' : 'Add New Song'}"></h2>
+
+<form th:action="@{${song.id != null} ? '/songs/edit' : '/songs/add'}" method="post">
+    <!-- Hidden field for ID (only if it's an edit) -->
+    <input type="hidden" name="id" th:if="${song.id != null}" th:value="${song.id}" />
+
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" th:value="${song.title}" required /><br><br>
+
+    <label for="genreId">Genre:</label>
+<!--    <input type="text" id="genre" name="genre" th:value="${song.genre.getName()}" required /><br><br>-->
+    <select id="genreId" name="genreId" required>
+        <option th:each="genre : ${genres}"
+                th:value="${genre.id}"
+                th:text="${genre.name}"
+                th:selected="${song.genre != null && genre.id == song.genre.id}"></option>
+    </select><br><br>
+
+    <label for="releaseYear">Release Year:</label>
+    <input type="number" id="releaseYear" name="releaseYear" th:value="${song.releaseYear}" required /><br><br>
+
+    <label for="albumId">Album:</label>
+    <select id="albumId" name="albumId" required>
+        <option th:each="album : ${albums}"
+                th:value="${album.id}"
+                th:text="${album.name}"
+                th:selected="${song.album != null && album.id == song.album.id}"></option>
+    </select><br><br>
+
+    <button type="submit" th:text="${song.id != null ? 'Save Changes' : 'Add Song'}"></button>
+</form>
+
+
+<a href="/songs">Cancel</a>
+
+</body>
+</html>

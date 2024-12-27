@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Performer to Song</title>
+    <style type = "text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Select the Artist to Add to the List of Performers</h1>
+</header>
+<form action="/artists" method="post">
+    <section>
+        <h2>Select Artist:</h2>
+        <div th:each="artist : ${artists}">
+            <input type="radio" name="artistId" th:value="${artist.getId()}" th:text="${artist.getFirstName()}"/>
+            <br/>
+        </div>
+        <br/>
+        <input type="hidden" name="trackId" th:value="${trackId}"/>
+        <input type="submit" value="Add Artist">
+    </section>
+    <aside>
+        <table>
+            <tr>
+                <td><b>Track ID</b></td>
+                <td th:text="${trackId}">Track ID</td>
+            </tr>
+        </table>
+<!--        <div>Genre of song: <span th:text="${song.getGenre()}"></span> </div>-->
+<!--        <ul>-->
+<!--            <li th:each = "artist : ${song.getPerformers()} " th:text="${artist.getFirstName()}"></li>-->
+<!--        </ul>-->
+    </aside>
+</form>
+</body>
+</html>

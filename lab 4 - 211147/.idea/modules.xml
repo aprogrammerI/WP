@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/WP_2024_lab4_211147-master.iml" filepath="$PROJECT_DIR$/.idea/WP_2024_lab4_211147-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab4/wp-2024.iml" filepath="$PROJECT_DIR$/lab4/wp-2024.iml" />
+    </modules>
+  </component>
+</project>

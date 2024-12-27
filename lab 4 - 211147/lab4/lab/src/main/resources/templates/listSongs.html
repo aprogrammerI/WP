@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Songs Homepage - Welcome to My Music Store</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Music Store</h1>
+</header>
+<main>
+    <h2>Choose a song:</h2>
+
+    <!-- Display radio buttons for each song,
+            the value should be the trackId 
+            and the displayed text should be Title: <songTitle>, Genre:<genre>, Release Year: <releaseYear> -->
+    <form action="/songs" method="post">
+        <th:block th:each="song : ${songs}">
+            <input type="radio"
+                   name="selectedSongId"
+                   th:id="${song.getId()}"
+                   th:value="${song.getId()}"/>
+
+            <label th:for="${song.getId()}"
+                   th:text="${'Title: ' + song.getTitle() + ', Genre: ' + song.getGenre()+ ', Release Year: ' + song.getReleaseYear() + ', Album: ' + song.getAlbum().getName()}"></label>
+
+            <th:block>
+                <a th:href="@{'/songs/edit/{id}' (id=${song.getId()})}"
+                   class="btn btn-sm btn-info edit-product">
+                    <i class="fa fa-trash">Edit</i>
+                </a>
+            </th:block>
+
+            <th:block>
+                <form th:action="@{'/songs/delete/{id}' (id=${song.getId()})}"
+                      th:method="DELETE">
+                    <button type="submit"
+                            class="btn btn-sm btn-danger delete-product">
+                        <i class="fa fa-trash">Delete</i>
+                    </button>
+                </form>
+            </th:block>
+
+
+            <br/>
+        </th:block>
+
+        <br/> <br/>
+
+        <input type='submit' value='Submit'>
+
+    </form>
+</main>
+</body>
+</html>

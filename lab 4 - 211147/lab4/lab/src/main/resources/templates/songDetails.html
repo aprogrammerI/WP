@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Song Details</title>
+
+</head>
+<body>
+
+<form action="/songsDetails" method="post">
+    <th:block th:if="${selectedSong!=null}">
+
+        <header>
+            <h1>Song title: <span th:text="${selectedSong.getTitle()}"></span></h1>
+        </header>
+
+        <section>
+            <h2>Genre: <span th:text="${selectedSong.getGenre()}"></span></h2>
+            <h2>Year: <span th:text="${selectedSong.getReleaseYear()}"></span></h2>
+            <th:block th:each="artist : ${selectedSong.getPerformers()}">
+                <span th:text="${artist.getLastName() + ' ' + artist.getFirstName()}"></span></br>
+            </th:block>
+
+        </section>
+        <br/>
+
+        <section>
+            <h2>Artist songs: </h2>
+            <th:block th:each="artist : ${selectedSong.getPerformers()}">
+                <span th:text="${artist.getLastName() + ' ' + artist.getFirstName() + ' - ' + artist.getSongs()}"></span> </br>
+<!--                <section style="display: inline">-->
+<!--                    <th:block th:each="song : ${artists}">-->
+<!--                        <span th:text="'- ' + ${artist.getSongs()}"></span>-->
+<!--                    </th:block>-->
+<!--                    </br>-->
+<!--                </section>-->
+            </th:block>
+        </section>
+
+    </th:block>
+
+
+
+    <input type='submit' value='Go back to song list'>
+</form>
+
+</body>
+</html>

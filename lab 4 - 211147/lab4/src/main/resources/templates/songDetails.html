@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Song Details</title>
+    <style type = "text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Song Details</h1>
+</header>
+
+<div>
+    <h3 th:text="${song.getTitle()}">Song Title</h3>
+    <p><strong>Genre:</strong> <span th:text="${song.getGenre().getName()}">Genre</span></p>
+    <p><strong>Year:</strong> <span th:text="${song.getReleaseYear()}">Year</span></p>
+
+    <h2>Performers:</h2>
+    <ul>
+        <li th:each="performer : ${artists}" th:text="${performer.getFirstName()}">Performer</li>
+    </ul>
+
+    <button><a href="/songs" style="text-decoration: none">Go back to songs</a></button>
+
+</div>
+
+
+</body>
+</html>
